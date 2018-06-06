@@ -1,6 +1,6 @@
 <?php
 
-namespace Igorwanbarros\CommandsLaravel\GenerateModules;
+namespace Softcomtecnologia\CommandsLaravel\GenerateModules;
 
 
 use Illuminate\Console\Command;

@@ -1,10 +1,10 @@
 <?php
 
 echo '-> Copiando App Base'. PHP_EOL;
-shell_exec("cp -r -n vendor/igorwanbarros/development-laravel/* ../{{module}}/ ");
+shell_exec("cp -r -n vendor/softcomtecnologia/development-laravel/* ../{{module}}/ ");
 
 echo '-> Criando arquivo .env'. PHP_EOL;
-shell_exec("cp -r -n vendor/igorwanbarros/development-laravel/.env.example .env");
+shell_exec("cp -r -n vendor/softcomtecnologia/development-laravel/.env.example .env");
 
 echo '-> Aplicando permissões'. PHP_EOL;
 shell_exec("chmod -R 777 storage/");

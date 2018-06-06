@@ -1,8 +1,8 @@
 <?php
 
-namespace Igorwanbarros\CommandsLaravel\GenerateModules\Stub;
+namespace Softcomtecnologia\CommandsLaravel\GenerateModules\Stub;
 
-use Igorwanbarros\CommandsLaravel\GenerateModules\AbstractStub;
+use Softcomtecnologia\CommandsLaravel\GenerateModules\AbstractStub;
 use Illuminate\Filesystem\Filesystem;
 
 class MigrationsStub extends AbstractStub

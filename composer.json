@@ -1,5 +1,5 @@
 {
-    "name": "igorwanbarros/commands-laravel",
+    "name": "softcomtecnologia/commands-laravel",
     "description": "Commandos para projetos em Laravel",
     "type": "project",
     "license": "MIT",
@@ -15,7 +15,7 @@
     },
     "autoload": {
       "psr-4": {
-        "Igorwanbarros\\CommandsLaravel\\": "src/"
+        "Softcomtecnologia\\CommandsLaravel\\": "src/"
       }
     },
     "minimum-stability": "dev"

@@ -1,44 +1,63 @@
 <?php
-
 namespace Softcomtecnologia\CommandsLaravel\GenerateModules;
 
-
 use Illuminate\Console\Command;
-use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\App;
 
-class MakeModuleCommand extends Command implements SelfHandling
+class MakeModuleCommand extends Command
 {
-
-    protected $signature    = 'make:generate-module {module : Module name}';
-
-    protected $description  = "Create new reusable module in Laravel.";
-    protected $class        = [];
-
-    protected $myPackage    = '';
-    protected $pathStub     = '';
-
-
+    /**
+     * @var string
+     */
+    protected $signature = "make:generate-module {module : Module name}";
+    /**
+     * @var string
+     */
+    protected $description = "Create new reusable module in Laravel.";
+    /**
+     * @var array
+     */
+    protected $class = [];
+    /**
+     * @var string
+     */
+    protected $myPackage = "";
+    /**
+     * @var string
+     */
+    protected $pathStub = "";
+    /**
+     * @return string
+     */
     protected function getMyPackage()
     {
         return $this->myPackage;
     }
-
+    /**
+     * @param $package
+     * @return $this
+     */
     protected function setMyPackage($package)
     {
         $this->myPackage = $package;
 
         return $this;
     }
-
+    /**
+     * @param $stubPath
+     * @return $this
+     */
     protected function setMyStubPath($stubPath)
     {
         $this->pathStub = $stubPath;
 
         return $this;
     }
-
+    /**
+     * @param $className
+     * @return $this
+     */
     public function addClass($className)
     {
         if (is_array($className)) {
@@ -53,7 +72,10 @@ class MakeModuleCommand extends Command implements SelfHandling
                 }
 
                 if (!array_key_exists($class, $array)) {
-                    $this->class[] = ['class' => $class, 'args' => $args];
+                    $this->class[] = [
+                        "class" => $class,
+                        "args" => $args
+                    ];
                 }
             }
 
@@ -64,20 +86,23 @@ class MakeModuleCommand extends Command implements SelfHandling
 
         return $this;
     }
-
-
+    /**
+     * @return string
+     */
     public function getBaseDir()
     {
         return App::getFacadeApplication()->basePath();
     }
-
-
+    /**
+     * @throws \Exception
+     */
     public function fire()
     {
         $this->buildClass();
     }
-
-
+    /**
+     * @throws \Exception
+     */
     protected function buildClass()
     {
         if (!$this->argument('module')) {
@@ -110,8 +135,9 @@ class MakeModuleCommand extends Command implements SelfHandling
             }
         }
     }
-
-
+    /**
+     * @param $obj
+     */
     protected function _objectBuild($obj)
     {
         $this->_confgurationClass($obj);
@@ -122,8 +148,11 @@ class MakeModuleCommand extends Command implements SelfHandling
             $this->warn("it was not possible to create the file `{$obj->fileName()}`");
         }
     }
-
-
+    /**
+     * @param $obj
+     * @param array $args
+     * @return mixed
+     */
     protected function _setArgsObj($obj, array $args)
     {
         if (isset($args['fileName'])) {
@@ -144,25 +173,27 @@ class MakeModuleCommand extends Command implements SelfHandling
 
         return $obj;
     }
-
-
+    /**
+     * @param $obj
+     */
     protected function _confgurationClass($obj)
     {
         $obj->setPackage($this->getMyPackage());
 
         if ($this->pathStub != '') {
-            $path   = substr(strstr($obj->getStubPath(), 'templates'), 9);
+            $path = substr(strstr($obj->getStubPath(), 'templates'), 9);
             $obj->setStubPath($this->pathStub . $path);
         }
 
 
     }
-
-
+    /**
+     * @param $files
+     * @return string
+     */
     protected function _verifyIsDirectory($files)
     {
         $path = dirname(App::getFacadeApplication()->basePath()) . '/' . $this->argument('module');
-
         $exec = 'y';
 
         if ($files->isDirectory($path)) {
@@ -172,5 +203,4 @@ class MakeModuleCommand extends Command implements SelfHandling
 
         return strtolower($exec);
     }
-
 }
